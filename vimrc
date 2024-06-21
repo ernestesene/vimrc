@@ -147,6 +147,7 @@ let g:ale_c_clangformat_options='--style="{BasedOnStyle: google}"'
 let g:ale_fixers = {'c':['clang-format']}
 let g:ale_fixers['cpp'] = g:ale_fixers['c']
 let g:ale_fixers['javascript'] =  ['prettier']
+let g:ale_fixers['json'] =  ['prettier']
 let g:ale_fixers['sh'] =  ['shfmt']
 
 "ale HACK
