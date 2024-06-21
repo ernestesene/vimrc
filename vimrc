@@ -190,7 +190,7 @@ let g:load_doxygen_syntax=1
 "
 
 "gitgutter ======
-let g:gitgutter_enabled = 0
+"let g:gitgutter_enabled = 0
 
 
 "Ctags and omnicomplete
