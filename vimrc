@@ -1,4 +1,5 @@
 " My vimrc file
+" For AVR see AvrALE()
 "
 " Based on example vimrc by Bram Moolenaar <Bram@vim.org>
 "
@@ -254,6 +255,39 @@ nmap <C-_>a :cs find a <C-R>=expand("<cword>")<CR><CR>
 	\:vert scs find a <C-R>=expand("<cword>")<CR><CR>
 
 " AVR =========
+" NOTE: to enable avr support call AvrALE in your vim like this
+" :call AvrALE()
+"
+" You may also want to add the following to your Makefile and run
+" make complete
+"
+"
+" Makefile:
+"  # Change this values to suit your project. Example is given
+"  CC ?= avr-gcc
+"  INCLUDES ?= -I /usr/include/simavr/avr
+"  DEVICE ?= attiny13
+"  FREQUENCY ?= 1000000
+"  CFLAGS += -mmcu=$(DEVICE) -DF_CPU=$(FREQUENCY)
+"
+"
+"  # for code completion and language servers (libclang clangd)
+"  complete: compile_commands.json .clang_complete
+"
+"  # for completer .clang_complete
+"  .clang_complete: Makefile
+"  	echo -ne "$(INCLUDES)\n-I /usr/avr/include\n" > $@
+"  	grep -o \\-D__AVR_AT.* /usr/lib/gcc/avr/*/device-specs/specs-$(DEVICE) >> $@
+"
+"  # for clangd
+"  compile_commands.json: CFLAGS += -I /usr/avr/include
+"  compile_commands.json: Makefile
+"  	echo [{"directory": "'$(PWD)'","command": "'$(CC) $(CFLAGS)'","file": "'*.c'"}] > $@
+"
+" Makefile: ends here
+"
+"
+"
 echo 'call AvrALE() to enable AVR support'
 let s:avrALE_loaded=0
 function AvrALE()
@@ -261,17 +295,20 @@ function AvrALE()
    echo 'AvrALE() already activated'
    return
  endif
- let g:ale_disable_lsp=1
  let g:ale_c_cc_executable='avr-gcc'
  let g:ale_asm_gcc_executable='avr-gcc'
  let g:ale_cpp_cc_executable='avr-gcc'
- let g:ale_linters = {'c':['cc','cppcheck','flawfinder']}
+ let g:ale_linters = {'c':['cc','clangd','cppcheck','flawfinder']}
  let g:ale_linters['cpp'] = g:ale_linters['c']
 
- let g:clang_user_options='-I/usr/avr/include' "clang_complete
+ "clang_complete
+ let g:clang_user_options='-I/usr/avr/include -I/usr/include/simavr/avr'
+ " TODO how about -D__AVR_AT.* for .clang_complete?
 
- set path=.,/usr/avr/include,,
-"ctags -R  --kinds-C=+px -f ~/.vim/vimgit/avrtags /usr/avr/include
+  set path=.,,/usr/avr/include,/usr/include/simavr/avr
+
+"ctags -R  --kinds-C=+pxD -f ~/.vim/vimgit/avrtags /usr/avr/include
+"/usr/include/simavr/avr
  set tags-=~/.vim/vimgit/systags
  set tags+=~/.vim/vimgit/avrtags
 
