@@ -1,4 +1,7 @@
 " My vimrc file
+" (c) Ernest Esene <eroken1@gmail.com>
+" See LICENSE file
+"
 " For AVR see AvrALE()
 "
 " Based on example vimrc by Bram Moolenaar <Bram@vim.org>
@@ -255,38 +258,12 @@ nmap <C-_>a :cs find a <C-R>=expand("<cword>")<CR><CR>
 	\:vert scs find a <C-R>=expand("<cword>")<CR><CR>
 
 " AVR =========
-" NOTE: to enable avr support call AvrALE in your vim like this
-" :call AvrALE()
+" NOTE: to enable avr support use any of this, both is better
+" 1. :call AvrALE()  in your vim
+" 2. Add Makefile to you Makefile and run make complete
 "
-" You may also want to add the following to your Makefile and run
-" make complete
-"
-"
-" Makefile:
-"  # Change this values to suit your project. Example is given
-"  CC ?= avr-gcc
-"  INCLUDES ?= -I /usr/include/simavr/avr
-"  DEVICE ?= attiny13
-"  FREQUENCY ?= 1000000
-"  CFLAGS += -mmcu=$(DEVICE) -DF_CPU=$(FREQUENCY)
-"
-"
-"  # for code completion and language servers (libclang clangd)
-"  complete: compile_commands.json .clang_complete
-"
-"  # for completer .clang_complete
-"  .clang_complete: Makefile
-"  	echo -ne "$(INCLUDES)\n-I /usr/avr/include\n" > $@
-"  	grep -o \\-D__AVR_AT.* /usr/lib/gcc/avr/*/device-specs/specs-$(DEVICE) >> $@
-"
-"  # for clangd
-"  compile_commands.json: CFLAGS += -I /usr/avr/include
-"  compile_commands.json: Makefile
-"  	echo [{"directory": "'$(PWD)'","command": "'$(CC) $(CFLAGS)'","file": "'*.c'"}] > $@
-"
-" Makefile: ends here
-"
-"
+" Makefile is this repo
+" https://github.com/ernestesene/vimrc.git
 "
 echo 'call AvrALE() to enable AVR support'
 let s:avrALE_loaded=0
