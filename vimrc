@@ -66,7 +66,7 @@ endif
 " My vimrc starts here
 set tabstop=2
 set cindent shiftwidth=2
-set expandtab
+"set expandtab
 set spell spelllang=en_gb
 "highlight SpellLocal term=underline ctermbg=14 gui=undercurl guisp=Cyan
 highlight SpellLocal term=underline ctermbg=14 gui=undercurl guisp=Cyan ctermfg=0 guifg=Black
