@@ -138,11 +138,12 @@ let g:ale_lint_on_save=1
 let g:ale_lint_on_filetype_changed=0
 "let g:ale_c_always_make=0
 let g:ale_c_parse_makefile=1
-"let g:ale_c_cc_executable='gcc'
-"let g:ale_cpp_cc_executable='gcc'
 let g:ale_c_clangd_options='--clang-tidy --pch-storage=memory'
-"let g:ale_linters = {'c':['cc','clangtidy','cppcheck','flawfinder']}
-let g:ale_linters = {'c':['clangd','cppcheck','flawfinder']}
+" clang is default cc in ALE but does not support flag "-fanalyzer"
+let g:ale_c_cc_executable='gcc'
+let g:ale_cpp_cc_executable='gcc'
+
+let g:ale_linters = {'c':['clangd','cc','cppcheck','flawfinder']}
 let g:ale_linters['cpp'] = g:ale_linters['c']
 
 " fixers
