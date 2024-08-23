@@ -20,13 +20,13 @@
 
 CC ?= avr-gcc
 OFLAG ?= -Os -flto
-DEBUG ?= -ggdb
+DEBUG ?= -ggdb -fanalyzer
 INCLUDES ?= -I /usr/include/simavr/avr
 
 DEVICE = attiny13
 CLOCK = 1000000
 
-CFLAGS += -std=c11 -fanalyzer -Wanalyzer-too-complex -Wpedantic -Wextra -Wall $(INCLUDES) $(DEBUG) $(OFLAG) -DF_CPU=$(CLOCK) -mmcu=$(DEVICE) -fshort-enums
+CFLAGS += -std=c11 -Wpedantic -Wextra -Wall $(INCLUDES) $(DEBUG) $(OFLAG) -DF_CPU=$(CLOCK) -mmcu=$(DEVICE) -fshort-enums
 
 tags: *.c *.h built_in_defs.h
 	ctags -R --kinds-C=+pxD $^
