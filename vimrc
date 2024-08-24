@@ -148,7 +148,7 @@ let g:ale_linters['cpp'] = g:ale_linters['c']
 
 " fixers
 let g:ale_fix_on_save=1
-let g:ale_c_clangformat_options='--style="{BasedOnStyle: google}"'
+let g:ale_c_clangformat_options='--style="{BasedOnStyle: gnu}"'
 let g:ale_fixers = {'c':['clang-format']}
 let g:ale_fixers['cpp'] = g:ale_fixers['c']
 let g:ale_fixers['javascript'] =  ['prettier']
