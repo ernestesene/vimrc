@@ -141,7 +141,10 @@ let g:ale_c_parse_makefile=1
 let g:ale_c_clangd_options='--clang-tidy --pch-storage=memory'
 " clang is default cc in ALE but does not support flag "-fanalyzer"
 let g:ale_c_cc_executable='gcc'
+let g:ale_c_cc_options = '-Wall -Wextra -Wpedantic -fanalyzer'
 let g:ale_cpp_cc_executable='gcc'
+let g:ale_cpp_cc_options = g:ale_c_cc_options
+let g:ale_asm_gcc_options = g:ale_c_cc_options
 
 let g:ale_linters = {'c':['clangd','cc','cppcheck','flawfinder']}
 let g:ale_linters['cpp'] = g:ale_linters['c']
