@@ -308,4 +308,5 @@ augroup my_vimrc
   autocmd!
   au FileType arduino call s:arduinoALE()
   au BufNewFile,BufRead *.gdb setf gdb
+  au BufNewFile,BufRead * match SpellBad /\s\+$/
 augroup END
