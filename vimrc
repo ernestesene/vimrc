@@ -275,7 +275,7 @@ nmap <C-_>a :cs find a <C-R>=expand("<cword>")<CR><CR>
 " Makefile is this repo
 " https://github.com/ernestesene/vimrc.git
 "
-echo 'call AvrALE() to enable AVR support'
+
 let s:avrALE_loaded=0
 function AvrALE()
  if s:avrALE_loaded
@@ -312,6 +312,7 @@ endfunction
 
 augroup my_vimrc
   autocmd!
+  au FileType c,cpp echo ':call AvrALE() to enable AVR support'
   au FileType arduino call s:arduinoALE()
   au BufNewFile,BufRead *.gdb setf gdb
   au BufNewFile,BufRead * match SpellBad /\s\+$/
