@@ -65,10 +65,14 @@ endif
 
 " My vimrc starts here
 
-" Other features you can enable
-"set cursorline "expensive redraw
-"set cc=80	"expensive redraw
-"set foldmethod=indent
+set cursorline "expensive redraw
+set colorcolumn=+1 "expensive redraw
+set foldmethod=indent
+
+
+" Control-S for save :update
+nmap <c-s> :update<CR>
+imap <c-s> <c-o>:update<CR>
 
 set tabstop=2
 set cindent shiftwidth=2
