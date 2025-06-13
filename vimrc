@@ -310,10 +310,34 @@ function s:arduinoALE()
   return
 endfunction
 
+
+let s:pymode=0
+function s:PythonMode()
+	" only one python3 terminal is supported for now
+	" check term_sendkeys() below
+	if s:pymode
+		return
+	endif
+	let s:pymode=1
+
+	" TODO empty preview window too large
+	pedit /dev/null "open empty preview window
+  "open python3 terminal for interactive experience
+	vertical terminal python3
+	" TODO not working as expected
+	wincmd l " return to python3 file
+  "to send code to python3 via <C-S> in visual, normal and insert modes
+	xmap <C-S> y:call term_sendkeys('python3','<C-R>"<C-V>')<CR>
+	nmap <C-S> yy:call term_sendkeys('python3','<C-R>"')<CR>
+	imap <C-S> <C-[>yy:call term_sendkeys('python3','<C-R>"')<CR>a
+	"xmap <C-S> y<C-W>h<C-W>Ni<C-W>""<CR><C-W>N<C-W>l
+endfun
+
 augroup my_vimrc
   autocmd!
   au FileType c,cpp echo ':call AvrALE() to enable AVR support'
   au FileType arduino call s:arduinoALE()
   au BufNewFile,BufRead *.gdb setf gdb
   au BufNewFile,BufRead * match SpellBad /\s\+$/
+  au FileType python call s:PythonMode()
 augroup END
