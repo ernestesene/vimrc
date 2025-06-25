@@ -350,6 +350,7 @@ augroup my_vimrc
   au FileType c,cpp call s:advertiseAvrALE()
   au FileType arduino call s:arduinoALE()
   au BufNewFile,BufRead *.gdb setf gdb
+  " highlight tailing white spaces
   au BufNewFile,BufRead * match SpellBad /\s\+$/
   au FileType python call s:PythonMode()
 augroup END
