@@ -307,6 +307,14 @@ function AvrALE()
  return
 endfunction
 
+let s:advertisedAvrALE=0
+function s:advertiseAvrALE()
+	if !s:advertisedAvrALE
+		echo ':call AvrALE() to enable AVR support'
+		let s:advertisedAvrALE=1
+	endif
+endfunction
+
 " arduino =======
 function s:arduinoALE()
   set filetype+=.cpp
@@ -339,7 +347,7 @@ endfun
 
 augroup my_vimrc
   autocmd!
-  au FileType c,cpp echo ':call AvrALE() to enable AVR support'
+  au FileType c,cpp call s:advertiseAvrALE()
   au FileType arduino call s:arduinoALE()
   au BufNewFile,BufRead *.gdb setf gdb
   au BufNewFile,BufRead * match SpellBad /\s\+$/
